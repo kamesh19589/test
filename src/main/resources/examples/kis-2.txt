@@ -1,0 +1,41 @@
+{
+  "users" : [
+        	
+	{
+	"name" : "ram",
+	"gender" : "male",
+	"age" : 19,
+	"group" : "btech",
+	"marks" : 230
+	},
+	{
+	"name" : "kamesh",
+	"gender" "male",
+	"age" : 23,
+	"group" : "mtech"
+	"marks" : 340
+	},
+	{
+	"name" : "aswini",
+	"gender" : "female",
+	"age" : 24,
+	"group" : "bsc"
+	"marks" : 260
+	},
+	{
+	"name" : "ramya",
+	"gender" : "female",
+	"age" : 18,
+	"group" : "bcom",
+	"marks" : 430
+	},	
+	"name" : "gajini",
+	"gender" : "male",
+	"age" : 27, 
+	"group" : "msc"
+	"marks" : 570
+	}
+     ]
+}
+	
+

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="b02e1084-df64-4dab-ba7e-ef202c57e420" >
+		<http:listener-connection host="localhost" port="8082" />
+	</http:listener-config>
+	<flow name="testFlow" doc:id="b263e457-84ba-4d19-9b07-e3ca0180186c" >
+		<http:listener doc:name="Listener" doc:id="89870508-8176-413f-bac5-a4053223a9c0" path="/api/test" config-ref="HTTP_Listener_config"/>
+		<logger level="INFO" doc:name="Logger" doc:id="cfff2fa8-c3a4-4b37-904e-6ff54c62bc59" message="starts with................#[payload]"/>
+		<ee:transform doc:name="Transform Message" doc:id="acea13ac-eced-43b4-a7f7-121aae891473" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/xml
+---
+{
+  users :{
+        (payload map(use,ind) ->      		
+        		{     	              
+        		user  :
+        		{
+        		    name: use.name,
+        		    gender: use.gender,
+        		     group: use.group,
+        		     marks: use.marks,
+        		     (age: use.age) if use.age>=20
+        		    }
+        		    } )
+        	}
+        	}]]></ee:set-payload>
+			</ee:message>
+			<ee:variables />
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="a4ddac18-da8a-4720-9f5f-d4bcf6e9f351" message="ends with.............#[payload]"/>
+	</flow>
+</mule>

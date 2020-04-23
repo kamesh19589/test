@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<types:mule xmlns:types="http://www.mulesoft.org/schema/mule/types">
+  <types:catalog>
+    <types:type name="json" format="csv">
+      <types:shape format="weave" example="examples/kis-3.txt"><![CDATA[%dw 2.0
+
+type json = Array<{| "{": String |}>
+
+]]></types:shape>
+      <types:properties>
+        <types:property name="headerLineNumber" value="0"/>
+        <types:property name="header" value="true"/>
+        <types:property name="isQuotedString" value="false"/>
+      </types:properties>
+    </types:type>
+  </types:catalog>
+  <types:enrichment select="#acea13ac-eced-43b4-a7f7-121aae891473">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="json"/>
+        </types:message>
+      </types:input-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#f728ca5f-bbe0-4746-8cd9-5ca19c532422">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="json"/>
+        </types:message>
+      </types:input-event>
+    </types:processor-declaration>
+  </types:enrichment>
+</types:mule>
